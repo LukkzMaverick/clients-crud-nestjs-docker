@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  node:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    entrypoint: dockerize -wait tcp://db:27017 -timeout 20s docker-entrypoint.sh
+    container_name: node
+    networks:
+      - node_network
+    volumes:
+      - ./api:/home/node/app
+    tty: true
+    depends_on:
+      - db
+  db:
+    image: mongo
+    container_name: db
+    environment:
+      MONGO_INITDB_DATABASE: builders
+      ME_CONFIG_MONGODB_SERVER: mongo
+    volumes:
+    - ~/mongodb/database:/data/db
+    ports:
+    - 27017:27017
+    restart: always
+    networks: 
+     - node_network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: lukkzmaverick/fullcycle-desafio2-nginx
+    container_name: nginx 
+    networks: 
+     - node_network
+    ports:
+     - 8080:80
+    depends_on:
+      - node
+
+networks:
+  node_network:
+    driver: bridge
