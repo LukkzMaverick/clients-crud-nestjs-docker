@@ -58,7 +58,7 @@ class Address {
 
 }
 
-export class CreateClientDto {
+export class UpdateClientDto {
     @IsNotEmpty()
     @IsString()
     @ApiProperty({ description: 'Nome do cliente', example: 'Lucas' })

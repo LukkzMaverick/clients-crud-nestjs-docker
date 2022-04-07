@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { gender } from '../util/util';
+import { gender } from '../util';
 
 class Address {
     @Prop({ required: true })
