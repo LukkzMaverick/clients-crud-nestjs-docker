@@ -20,3 +20,10 @@ interface AdressInterface {
   complement: string;
 }
 
+export interface FindClientQueryInterface {
+  page?: string;
+  limit?: string;
+  gender?: gender;
+  minAge?: string;
+  maxAge?: string;
+}

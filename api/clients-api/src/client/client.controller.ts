@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { MongoIdValidationPipe } from '../common/pipes/mongoIdValidation.pipe';
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
-import { ClientInterface } from './interface/client.interface';
+import { ClientInterface, FindClientQueryInterface } from './interface/client.interface';
 import { gender } from './util';
 
 @Controller('clients')
@@ -19,8 +19,7 @@ export class ClientController {
     @ApiQuery({ required: false, name: 'maxAge', description: 'Idade máxima.', example: "30" })
     @ApiQuery({ required: false, name: 'limit', description: 'Limite de clientes por requisição.', example: "10" })
     @ApiQuery({ required: false, name: 'page', description: 'Página da requisição.', example: "1" })
-    @ApiQuery({ required: false, name: 'id', description: 'Filtro por id.' })
-    async find(@Query() query = {}): Promise<ClientInterface[]> {
+    async find(@Query() query: FindClientQueryInterface = {}): Promise<ClientInterface[]> {
         return await this.clientService.find(query)
     }
 
