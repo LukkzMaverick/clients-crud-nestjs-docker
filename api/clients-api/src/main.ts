@@ -1,10 +1,12 @@
-import { ValidationPipe } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+export let app: INestApplication
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('Client API')
@@ -14,4 +16,5 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, document);
   await app.listen(3000);
 }
+
 bootstrap();

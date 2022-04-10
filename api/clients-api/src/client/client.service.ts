@@ -7,30 +7,34 @@ import { Client } from './schema/client.schema';
 import { calculateAge, messagesClient } from './util';
 import { DateTime } from "luxon";
 import { UpdateClientDto } from './dto/update-client.dto';
+import { FindResponseInterface } from './interface/findResponse.interface';
 
 @Injectable()
 export class ClientService {
     constructor(@InjectModel(Client.name) private readonly clientModel: Model<ClientInterface>) { }
 
-    async find(query: FindClientQueryInterface): Promise<ClientInterface[]> {
+    async find(query: FindClientQueryInterface): Promise<FindResponseInterface> {
         let { gender, minAge, maxAge } = query
         let page = parseInt(query.page)
         let limit = parseInt(query.limit)
         if (!page) page = 1;
         if (!limit) limit = 0;
         const objQuery: any = {}
-        if (gender) objQuery.gender = gender
-        if (minAge || maxAge) objQuery.birthDate = {}
-        const date = DateTime.now()
-        if (maxAge) objQuery.birthDate.$gt = date.minus({ years: parseInt(maxAge) + 1 })
-        if (minAge) objQuery.birthDate.$lte = date.minus({ years: parseInt(minAge) })
+        if (gender) objQuery.gender = gender;
+        if (minAge || maxAge) objQuery.birthDate = {};
+        const date = DateTime.now();
+        if (maxAge) objQuery.birthDate.$gt = date.minus({ years: parseInt(maxAge) + 1 });
+        if (minAge) objQuery.birthDate.$lte = date.minus({ years: parseInt(minAge) });
         const skipIndex = (page - 1) * limit;
-        let clients: Array<ClientInterface> = await this.clientModel.find(objQuery)
-            .sort({ _id: 1 }).limit(limit).skip(skipIndex).lean();
+        const [clients, count] = await Promise.all([
+            this.clientModel.find(objQuery)
+            .sort({ _id: 1 }).limit(limit).skip(skipIndex).lean(),
+            this.clientModel.countDocuments(objQuery)
+          ]);
         clients.forEach(client => {
-            client.age = calculateAge(new Date(client.birthDate))
-        })
-        return clients
+            client.age = calculateAge(new Date(client.birthDate));
+        });
+        return {total: count, data: clients};
     }
 
     async create(createClientDto: CreateClientDto): Promise<void> {
