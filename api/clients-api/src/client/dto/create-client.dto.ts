@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
     IsDateString,
@@ -13,7 +13,7 @@ import {
 } from 'class-validator';
 import { gender } from '../util';
 
-class Address {
+export class Address {
     @IsNotEmpty()
     @IsString()
     @ApiProperty({

@@ -6,9 +6,9 @@ import { getAClientCreateDto, getAValidClient, getAValidId } from './util/test';
 describe('ClientController', () => {
   let clientController: ClientController;
   const clients = [getAValidClient(), getAValidClient()]
-
+  const responseFind = {data: clients, total: 2}
   const mockRepository = {
-    find: jest.fn().mockReturnValue(clients),
+    find: jest.fn().mockReturnValue(responseFind),
     create: jest.fn().mockReturnValue(null),
     update: jest.fn().mockReturnValue(null),
     delete: jest.fn().mockReturnValue(null),
@@ -33,8 +33,8 @@ describe('ClientController', () => {
     })
     it('should return a list of clients', async () => {
       const result = await clientController.find()
-      expect(result).toEqual(clients)
-      expect(result).toHaveLength(2)
+      expect(result).toEqual(responseFind)
+      expect(result.data).toHaveLength(2)
       expect(mockRepository.find).toBeCalledTimes(1);
     })
   })

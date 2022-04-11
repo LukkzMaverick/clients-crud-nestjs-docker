@@ -7,7 +7,6 @@ import { IsMongoId, validateSync } from 'class-validator';
 
 export class MongoIdValidationPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
-    console.log(value)
     const id = new MongoId(value);
     const errors = validateSync(id);
     if (errors.length > 0) {
@@ -25,8 +24,6 @@ export class MongoIdValidationPipe implements PipeTransform {
 
 export class MongoId {
   constructor(id) {
-    console.log(id)
-    console.log(typeof id)
     this.id = id;
   }
 

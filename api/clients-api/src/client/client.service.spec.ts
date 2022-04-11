@@ -27,32 +27,33 @@ describe('ClientService', () => {
   });
 
   describe('find', () => {
+    const clientsResponseService = {data: [getAValidClient(), getAValidClient()], total: 2}
 
     afterEach(() => {
       MockRepository.find.mockClear()
+      MockRepository.countDocuments.mockClear()
     })
 
     it('should return a list of clients', async () => {
       const query: FindClientQueryInterface = { gender: gender.MALE, maxAge: '30', minAge: '10' }
       const result = await clientService.find(query)
-      const clientsResponseService = [getAValidClient(), getAValidClient()]
       expect(result).toEqual(clientsResponseService)
       expect(MockRepository.find).toBeCalledTimes(1);
-      expect(result).toHaveLength(2)
+      expect(MockRepository.countDocuments).toBeCalledTimes(1);
+      expect(result.data).toHaveLength(2)
     })
 
     it('should return a list of clients', async () => {
       const query: FindClientQueryInterface = { gender: gender.MALE, limit: '10', page: '1', maxAge: '30' }
       const result = await clientService.find(query)
-      const clientsResponseService = [getAValidClient(), getAValidClient()]
       expect(result).toEqual(clientsResponseService)
       expect(MockRepository.find).toBeCalledTimes(1);
-      expect(result).toHaveLength(2)
+      expect(MockRepository.countDocuments).toBeCalledTimes(1);
+      expect(result.data).toHaveLength(2)
     })
   })
 
   describe('create', () => {
-
     afterEach(() => {
       MockRepository.findOne.mockClear()
     })
@@ -153,4 +154,5 @@ class MockRepository {
   static updateOne = jest.fn();
   static findOne = jest.fn();
   static deleteOne = jest.fn();
+  static countDocuments = jest.fn().mockReturnValue(2);
 }
