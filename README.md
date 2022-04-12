@@ -25,4 +25,4 @@ $ npm run test:cov
 Api is Available at https://clients-apiz.herokuapp.com
 
 ## Swagger
-Swagger is avaliable at http://localhost:8080/api-docs
+Swagger is avaliable at https://clients-apiz.herokuapp.com/api-docs/
