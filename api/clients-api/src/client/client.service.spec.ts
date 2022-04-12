@@ -58,11 +58,11 @@ describe('ClientService', () => {
       MockRepository.findOne.mockClear()
     })
 
-    it('should create a new client and return void', async () => {
+    it('should create a new client', async () => {
       const dto: CreateClientDto = getAClientCreateDto()
       MockRepository.findOne.mockReturnValue(null)
       const result = await clientService.create(dto)
-      expect(result).toEqual(undefined)
+      expect(result).toEqual({_id: getAValidId()})
       expect(MockRepository.findOne).toBeCalledTimes(1);
     })
 
@@ -139,8 +139,8 @@ describe('ClientService', () => {
 });
 const clientsResponseDatabase = [getAValidClientWithoutAge(), getAValidClientWithoutAge()]
 class MockRepository {
-  constructor(private data) { }
-  save = jest.fn().mockResolvedValue(this.data);
+  constructor() {}
+  save = jest.fn().mockResolvedValue({_id: getAValidId()});
   static find = jest.fn().mockReturnValue({
     sort: jest.fn().mockReturnValue({
       limit: jest.fn().mockReturnValue({

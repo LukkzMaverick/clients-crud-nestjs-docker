@@ -5,6 +5,7 @@ import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { FindClientQueryInterface } from './interface/client.interface';
+import { CreateResponseInterface } from './interface/createRespones.interface';
 import { FindResponseInterface } from './interface/findResponse.interface';
 import { responseCreateClientSwagger, responseFindClientSwagger } from './swagger/responses';
 import { ClientResponse } from './swagger/types';
@@ -30,7 +31,7 @@ export class ClientController {
 
     @Post()
     @ApiResponse(responseCreateClientSwagger)
-    async create(@Body() createClientDto: CreateClientDto): Promise<void> {
+    async create(@Body() createClientDto: CreateClientDto): Promise<CreateResponseInterface> {
         return await this.clientService.create(createClientDto)
     }
 

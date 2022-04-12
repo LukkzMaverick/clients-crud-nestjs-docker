@@ -10,6 +10,11 @@ export class ClientResponse extends CreateClientDto{
     __v: number;
 }
 
+export class CreateClient {
+    @ApiProperty({description: "MongoDB Id", example: '507f1f77bcf86cd799439011'})
+    _id: string
+}
+
 export class FindClient {
     @ApiProperty({description: "Número total de itens no banco de dados, diferente do número de itens devolvidos por conta da paginação.", example: 2})
     total: number;

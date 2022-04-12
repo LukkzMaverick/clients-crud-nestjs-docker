@@ -9,7 +9,7 @@ describe('ClientController', () => {
   const responseFind = {data: clients, total: 2}
   const mockRepository = {
     find: jest.fn().mockReturnValue(responseFind),
-    create: jest.fn().mockReturnValue(null),
+    create: jest.fn().mockReturnValue({_id: getAValidId()}),
     update: jest.fn().mockReturnValue(null),
     delete: jest.fn().mockReturnValue(null),
   }
@@ -45,7 +45,7 @@ describe('ClientController', () => {
     })
     it('should return void', async () => {
       const result = await clientController.create(getAClientCreateDto())
-      expect(result).toEqual(null)
+      expect(result).toEqual({_id: getAValidId()})
       expect(mockRepository.create).toBeCalledTimes(1);
     })
   })

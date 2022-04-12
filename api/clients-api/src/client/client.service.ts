@@ -8,6 +8,7 @@ import { calculateAge, messagesClient } from './util';
 import { DateTime } from "luxon";
 import { UpdateClientDto } from './dto/update-client.dto';
 import { FindResponseInterface } from './interface/findResponse.interface';
+import { CreateResponseInterface } from './interface/createRespones.interface';
 
 @Injectable()
 export class ClientService {
@@ -37,7 +38,7 @@ export class ClientService {
         return {total: count, data: clients};
     }
 
-    async create(createClientDto: CreateClientDto): Promise<void> {
+    async create(createClientDto: CreateClientDto): Promise<CreateResponseInterface> {
         const { email } = createClientDto;
         const emailAlreadyExists = await this.clientModel.findOne({
             email
@@ -45,7 +46,8 @@ export class ClientService {
         if (emailAlreadyExists)
             throw new ForbiddenException(messagesClient.EMAIL_REGISTERED);
         const newClient = new this.clientModel(createClientDto);
-        await newClient.save();
+        const client = await newClient.save();
+        return {_id: client._id.toString()}
     }
 
     async update(_id: string, updateClientDto: UpdateClientDto): Promise<void> {
