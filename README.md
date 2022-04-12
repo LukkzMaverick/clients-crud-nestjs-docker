@@ -32,3 +32,6 @@ Api is Available at https://clients-apiz.herokuapp.com
 
 ## Swagger
 Swagger is avaliable at https://clients-apiz.herokuapp.com/api-docs/
+
+## Postman Collection
+O arquivo chamado builders clients.postman_collection.json na raiz do projeto, é só importar no postman
