@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "4808761f-f45b-40b0-aad5-b8491580b6ab",
+		"name": "builders clients",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{WEB_DEPLOY}}/clients?gender=MALE&page=1&limit=10&minAge=10&maxAge=40",
+							"host": [
+								"{{WEB_DEPLOY}}"
+							],
+							"path": [
+								"clients"
+							],
+							"query": [
+								{
+									"key": "gender",
+									"value": "MALE"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "minAge",
+									"value": "10"
+								},
+								{
+									"key": "maxAge",
+									"value": "40"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{WEB_DEPLOY}}/clients/:id",
+							"host": [
+								"{{WEB_DEPLOY}}"
+							],
+							"path": [
+								"clients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6254cdb1504bde115bdc5421"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Lucas\",\r\n  \"email\": \"luquinhas@gmail.com\",\r\n  \"phone\": \"+5585989906266\",\r\n  \"address\": {\r\n    \"city\": \"Fortaleza\",\r\n    \"zipCode\": \"60810-786\",\r\n    \"street\": \"Avenida Domingos Olimpio\",\r\n    \"district\": \"Benfica\",\r\n    \"complement\": \"Ap 1201 - Bloco 2\"\r\n  },\r\n  \"birthDate\": \"1997-01-22\",\r\n  \"gender\": \"MALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{WEB_DEPLOY}}/clients/:id",
+							"host": [
+								"{{WEB_DEPLOY}}"
+							],
+							"path": [
+								"clients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6254cb6b504bde115bdc541d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Lara\",\r\n  \"email\": \"lara@gmail.com\",\r\n  \"phone\": \"+5585989906266\",\r\n  \"address\": {\r\n    \"city\": \"Fortaleza\",\r\n    \"zipCode\": \"60810-786\",\r\n    \"street\": \"Avenida Domingos Olimpio\",\r\n    \"district\": \"Benfica\",\r\n    \"complement\": \"Ap 1201 - Bloco 2\"\r\n  },\r\n  \"birthDate\": \"1992-01-22\",\r\n  \"gender\": \"FEMALE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{WEB_DEPLOY}}/clients",
+							"host": [
+								"{{WEB_DEPLOY}}"
+							],
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{WEB_DEPLOY}}",
+					"host": [
+						"{{WEB_DEPLOY}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LOCALHOST",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "WEB_DEPLOY",
+			"value": "https://clients-apiz.herokuapp.com",
+			"type": "string"
+		}
+	]
+}
