@@ -11,6 +11,12 @@ cd clients-api
 npm i
 ```
 
+## Running the app
+
+```bash
+$ npm run start:dev
+```
+
 ## Test
 
 ```bash
