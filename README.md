@@ -3,7 +3,7 @@
 ## Get Started
 
 ```bash
-git clone
+git clone git@github.com:LukkzMaverick/clients-crud-nestjs-docker.git
 cd clients-crud-nestjs-docker
 docker-compose up -d
 docker exec -it node bash
