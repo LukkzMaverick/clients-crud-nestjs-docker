@@ -11,4 +11,18 @@ cd clients-api
 npm i
 ```
 
+## Test
 
+```bash
+# unit tests
+$ npm run test
+
+# test coverage
+$ npm run test:cov
+```
+
+#Deployed API
+Api is Available at https://clients-apiz.herokuapp.com
+
+## Swagger
+Swagger is avaliable at http://localhost:8080/api-docs
