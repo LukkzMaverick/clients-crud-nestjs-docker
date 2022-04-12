@@ -14,17 +14,17 @@ npm i
 ## Running the app
 
 ```bash
-$ npm run start:dev
+npm run start:dev
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+npm run test
 
 # test coverage
-$ npm run test:cov
+npm run test:cov
 ```
 
 ## Deployed API
