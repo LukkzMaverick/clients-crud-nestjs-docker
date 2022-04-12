@@ -21,7 +21,7 @@ $ npm run test
 $ npm run test:cov
 ```
 
-#Deployed API
+## Deployed API
 Api is Available at https://clients-apiz.herokuapp.com
 
 ## Swagger
